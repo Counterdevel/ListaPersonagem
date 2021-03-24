@@ -2,6 +2,7 @@ package com.example.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.listapersonagem.R;
+import com.example.listapersonagem.dao.PersonagemDAO;
 
 public class FormularioPersonagemActivity extends AppCompatActivity {
 
@@ -16,6 +18,10 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_personagem);
+
+        setTitle("Adicionar Personagem");
+
+        PersonagemDAO dao = new PersonagemDAO();
 
         EditText campoNome = findViewById(R.id.editText_nome);
         EditText campoAltura = findViewById(R.id.editText_altura);
@@ -31,8 +37,11 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
                 String nascimento = campoNascimento.getText().toString();
 
                 Personagem personagemSalvo = new Personagem(nome, altura, nascimento);
+                dao.salva(personagemSalvo);
 
-                Toast.makeText(FormularioPersonagemActivity.this, personagemSalvo.getNome() + " - " + personagemSalvo.getAltura() + " - " + personagemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(FormularioPersonagemActivity.this, ListaPersonagemActivity.class)); //Transaciona aa tela do formulario para a lista
+
+                //Toast.makeText(FormularioPersonagemActivity.this, personagemSalvo.getNome() + " - " + personagemSalvo.getAltura() + " - " + personagemSalvo.getNascimento(), Toast.LENGTH_SHORT).show();
 
                 new Personagem(nome, altura, nascimento);
 
