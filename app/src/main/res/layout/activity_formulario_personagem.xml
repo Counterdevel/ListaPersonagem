@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Nome" />
+        android:hint="Nome"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/editText_altura"
@@ -22,17 +22,17 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:ems="10"
-        android:inputType="numberDecimal"
-        android:text="Altura" />
+        android:hint="Altura"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/editText_nascimento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10"
         android:layout_margin="10dp"
-        android:inputType="date"
-        android:text="Nascimento" />
+        android:ems="10"
+        android:hint="Nascimento"
+        android:inputType="date" />
 
     <Button
         android:id="@+id/button_salvar"

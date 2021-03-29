@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,8 +25,6 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PersonagemDAO dao = new PersonagemDAO(); //Instanciando classe PErsonagem
-
         setTitle("Lista de Personagem");
 
         FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_novo_personagem); //associando ao id do FloatingActionButton
@@ -36,8 +36,27 @@ public class ListaPersonagemActivity extends AppCompatActivity {
         });
 
         //List<String> personagem = new ArrayList<>(Arrays.asList("Alex", "Ken", "Ryu"));
+    }
+
+    @Override
+    protected void onResume() { //Persiste os dados
+        super.onResume();
+
+        PersonagemDAO dao = new PersonagemDAO(); //Instanciando classe PErsonagem
 
         ListView listaDePersonagens  = findViewById(R.id.lista_personagem);
+        List<Personagem> personagens = dao.todos();
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dao.todos()));
+        listaDePersonagens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
+                Personagem personagemEscolhido = personagens.get(posicao);
+                //Log.i("personagem", "" + personagemEscolhido);
+
+                Intent vaiParaFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
+
+                startActivity(vaiParaFormulario);
+            }
+        });
     }
 }

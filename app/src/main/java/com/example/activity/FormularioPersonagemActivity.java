@@ -19,12 +19,12 @@ public class FormularioPersonagemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario_personagem);
 
-        setTitle("Adicionar Personagem");
+        setTitle("Adicionar Personagem"); //Muda o titulo do FormularioPersonagem
 
-        PersonagemDAO dao = new PersonagemDAO();
+        PersonagemDAO dao = new PersonagemDAO(); //Instancia a classe PersonagemDAO para o FormularioPersonagem
 
         EditText campoNome = findViewById(R.id.editText_nome);
-        EditText campoAltura = findViewById(R.id.editText_altura);
+        EditText campoAltura = findViewById(R.id.editText_altura);           //Econtra o EditText a partir da id declarada no xml
         EditText campoNascimento = findViewById(R.id.editText_nascimento);
 
         Button botaoSalvar = findViewById(R.id.button_salvar);
