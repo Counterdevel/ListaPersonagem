@@ -20,12 +20,17 @@ import java.util.List;
 
 public class ListaPersonagemActivity extends AppCompatActivity {
 
+    private final PersonagemDAO dao = new PersonagemDAO(); //Instanciando classe Personagem
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         setTitle("Lista de Personagem");
+
+        dao.salva(new Personagem("Pierre", "1,86", "14/02/2000"));
+        dao.salva(new Personagem("Gabriela", "1,60", "17/06/2003"));
 
         FloatingActionButton botaoNovoPersonagem = findViewById(R.id.fab_novo_personagem); //associando ao id do FloatingActionButton
         botaoNovoPersonagem.setOnClickListener(new View.OnClickListener() { // adiciona um evento ao FloatingActionButton para que ao clicar, vá para a tela do Formulario
@@ -42,8 +47,6 @@ public class ListaPersonagemActivity extends AppCompatActivity {
     protected void onResume() { //Persiste os dados
         super.onResume();
 
-        PersonagemDAO dao = new PersonagemDAO(); //Instanciando classe PErsonagem
-
         ListView listaDePersonagens  = findViewById(R.id.lista_personagem);
         List<Personagem> personagens = dao.todos();
         listaDePersonagens.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, dao.todos()));
@@ -53,7 +56,8 @@ public class ListaPersonagemActivity extends AppCompatActivity {
                 Personagem personagemEscolhido = personagens.get(posicao);
                 //Log.i("personagem", "" + personagemEscolhido);
 
-                Intent vaiParaFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class);
+                Intent vaiParaFormulario = new Intent(ListaPersonagemActivity.this, FormularioPersonagemActivity.class); //Joga as informações para o formulário
+                vaiParaFormulario.putExtra("personagem", personagemEscolhido);
 
                 startActivity(vaiParaFormulario);
             }
