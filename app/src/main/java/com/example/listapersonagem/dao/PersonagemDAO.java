@@ -20,18 +20,29 @@ public class PersonagemDAO {
 
     public void edita(Personagem personagem){ //metodo para fazeer alterações nos personagens
 
-        Personagem personagemEscolhido = null;  //para identificar o id do personagem que o usuario deseja fazer a modificação
-        for (Personagem p: personagens){
-            if(p.getId() == personagem.getId()){
-                personagemEscolhido = p;
-            }
-        }
-        if(personagemEscolhido != null){
-            int posicaoDoPersonagem = personagens.indexOf(personagemEscolhido);
+        Personagem personagemEncontrado = buscaPersonagemId(personagem);  //para identificar o id do personagem que o usuario deseja fazer a modificação
+        if(personagemEncontrado != null){
+            int posicaoDoPersonagem = personagens.indexOf(personagemEncontrado);
             personagens.set(posicaoDoPersonagem, personagem);
         }
 
     }
 
+    private Personagem buscaPersonagemId(Personagem personagem) { // busca o id do personagem
+        for (Personagem p: personagens){
+            if(p.getId() == personagem.getId()){
+                return p;
+            }
+        }
+        return null;
+    }
+
     public List<Personagem> todos() { return new ArrayList<>(personagens); } //busca as informações salvas
+
+    public void remove(Personagem personagem) {  //Remove personagens da lista
+        Personagem personagemDevolvido = buscaPersonagemId(personagem); //busca o id do personagem que deseja remover
+        if(personagemDevolvido != null) { //Verifica se o personagem é diferente de nulo
+            personagens.remove(personagemDevolvido);
+        }
+    }
 }
