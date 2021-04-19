@@ -35,24 +35,36 @@ public class Personagem implements Serializable {
         return nome;
     }
 
-    public void setNome(String nome)
-    {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getAltura() { return altura; }
+    public String getAltura() {
+        return altura;
+    }
 
-    public void setAltura(String altura) { this.altura = altura; }   //Convertendo os valores em strings
+    public void setAltura(String altura) {
+        this.altura = altura;
+    }   //Convertendo os valores em strings
 
     public String getNascimento() {
         return nascimento;
     }
 
-    public void setNascimento(String nascimento) {this.nascimento = nascimento; }
+    public void setNascimento(String nascimento) {
+        this.nascimento = nascimento;
+    }
 
 
-    public void setId(int id){ this.id = id; }   //Ids para identificar em qual nome da lista estamos clicando
-    public int getId(){
+    public void setId(int id) {
+        this.id = id;
+    }   //Ids para identificar em qual nome da lista estamos clicando
+
+    public int getId() {
         return id;
+    }
+
+    public boolean idValido() {
+        return id > 0;
     }
 }
